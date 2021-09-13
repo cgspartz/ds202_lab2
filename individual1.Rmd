@@ -18,3 +18,9 @@ hist(Cocoa)
 boxplot(Cocoa)
 ```
 
+```{r}
+? choco
+countryRates <- table(choco$CountryBeanOrigin, choco$Rating)
+barplot(countryRates, main="Ratings of Beans by Country Origin",xlab="Country of Origin",ylab="Rating")
+```
+
