@@ -10,17 +10,42 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown
-
+## #1
 ```{r}
 library(classdata)
+library(ggplot2)
 Cocoa <-choco$CocoaPercent
-hist(Cocoa)
-boxplot(Cocoa)
+hist(Cocoa, main = "Frequency  of ratings per Cocoa Percent", xlab = "Cocoa Percent")
+boxplot(Cocoa, ylab = "Cocoa Percent", xlab = "Frequency", main = "Frequency  of ratings per Cocoa Percent")
+#boxplot.stats(choco$CocoaPercent)$out
 ```
 
+
+## #2
 ```{r}
-? choco
-countryRates <- table(choco$CountryBeanOrigin, choco$Rating)
-barplot(countryRates, main="Ratings of Beans by Country Origin",xlab="Country of Origin",ylab="Rating")
+country <- table(choco$CountryBeanOrigin)
+country <- country[country > 10]
+barplot(country, main="Number of Ratings of Beans by Country Origin",xlab="Country of Origin",ylab="Number of ratings", las=2, cex.names=.5)
+```
+
+
+## #3
+```{r}
+ratingCP <- choco$Rating
+names(ratingCP) <- choco$CocoaPercent
+#plot(x = choco$CocoaPercent, y=choco$Rating, main = "")
+```
+
+
+## #4
+```{r}
+
+```
+
+
+
+## #5
+```{r}
+
 ```
 
