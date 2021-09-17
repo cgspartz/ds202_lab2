@@ -31,21 +31,30 @@ barplot(country, main="Number of Ratings of Beans by Country Origin",xlab="Count
 
 ## #3
 ```{r}
-ratingCP <- choco$Rating
-names(ratingCP) <- choco$CocoaPercent
-#plot(x = choco$CocoaPercent, y=choco$Rating, main = "")
+rcp <- choco$Rating/choco$CocoaPercent
+hist(rcp, main = "Ratings/CocoaPercent", xlab = "Ratings/CocoaPercent")
+summary(rcp)
 ```
-
+Ratings of chocolate tends to go up as Cocoa Percent increases, until it hits a point where the Cocoa percent is too high, and the rating falls with a high cocoa percent. This histogram shows that relation by showing the frequency with which a higher rating is given to high cocoa percents.
 
 ## #4
 ```{r}
-
+cr <- table(choco$CountryBeanOrigin,choco$Rating)
+cr
+barplot(cr)
 ```
 
 
 
 ## #5
+The first of my 2 analyses: How does the number of ratings depend on company making the chocolate? Another way of putting that, what are the biggest chocolate companies?
 ```{r}
-
+company <- table(choco$Company)
+company <- company[company > 10]
+median(company)
+quantile(company)
+min(company)
+max(company)
+barplot(company, main="Number of Ratings of Beans by Company",xlab="Company",ylab="Number of ratings", las=2, cex.names=.5)
 ```
-
+For the largest companies
