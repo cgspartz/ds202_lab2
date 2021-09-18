@@ -39,22 +39,35 @@ Ratings of chocolate tends to go up as Cocoa Percent increases, until it hits a 
 
 ## #4
 ```{r}
-cr <- table(choco$CountryBeanOrigin,choco$Rating)
-cr
+cr <- table(choco$CountryBeanOrigin)
+cr <- 
 barplot(cr)
 ```
 
 
 
 ## #5
+# Analysis 1:
 The first of my 2 analyses: How does the number of ratings depend on company making the chocolate? Another way of putting that, what are the biggest chocolate companies?
 ```{r}
 company <- table(choco$Company)
-company <- company[company > 10]
+company <- company[company >= 10]
 median(company)
 quantile(company)
 min(company)
 max(company)
-barplot(company, main="Number of Ratings of Beans by Company",xlab="Company",ylab="Number of ratings", las=2, cex.names=.5)
+barplot(company, main="Number of Ratings of Beans by Company",ylab="Number of ratings", las=2, cex.names=.5)
 ```
-For the largest companies
+
+For the largest 53 chocolate manufacturers in this data set, chosen since they have 10 or more chocolates on this list the average number of chocolates that they have had reviewed is only 14. Soma is easily the largest company in this data set with a staggering 52 different chocolates reviewed here. They are by far the biggest outlier here, especially when considering that very few companies have 10 or more chocolates reviewed in this data set, this goes to show just how large the companies shown in this graph really are.
+
+# Analysis 2:
+What is the total number of reviews per year?
+```{r}
+rd <- table(choco$ReviewDate)
+quantile(rd)
+barplot(rd)
+```
+
+On average 143 reviews happened each year with the number of reviews trending upwards until hitting a peak of 284 reviews in 2015. Since then the number of reviews has trended downwards. The number of reviews started small when this data started in 2006, and the number of reviews done in a year has always been higher since then, but in recent years a couple of years like 2017 and 2020 have dipped back down to the late 2000s number of reviews. Knowing the number of reviews in each year helps determine if the data set might be outdated with it focusing on old chocolates, or to see if the number of new chocolates each new year has given us has gone down.
+
