@@ -14,11 +14,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(classdata)
 library(ggplot2)
+library(tidyverse)
 Cocoa <-choco$CocoaPercent
 hist(Cocoa, main = "Frequency  of ratings per Cocoa Percent", xlab = "Cocoa Percent")
 boxplot(Cocoa, ylab = "Cocoa Percent", xlab = "Frequency", main = "Frequency  of ratings per Cocoa Percent")
-#boxplot.stats(choco$CocoaPercent)$out
 ```
+The majority of beans in this data set are centered around the cocoa percent of 65% to 75%. There are some outliers, like the chocolates up near 100% or the ones near 40% and 50%. Another thing with the percentages is that no chocolate goes below 40% in cocoa percentage, but some
+chocolates do hit one hundred percent cocoa percentage.
 
 
 ## #2
@@ -39,11 +41,17 @@ Ratings of chocolate tends to go up as Cocoa Percent increases, until it hits a 
 
 ## #4
 ```{r}
-cr <- table(choco$CountryBeanOrigin)
-cr <- 
-barplot(cr)
+flavor <- table(choco$Characteristics1)
+flavor_filtered <- flavor[flavor > 50]
+summary(as.numeric(flavor_filtered))
+choco_filtered <- filter(choco, Characteristics1 %in% names(flavor_filtered))
+country_filtered <- table(choco$CountryBeanOrigin) %>% 
+  sort(decreasing = TRUE) %>%
+  head(10)
+cc_filtered <- filter(choco_filtered, CountryBeanOrigin %in% names(country_filtered))
+tapply(cc_filtered$Rating, cc_filtered$CountryBeanOrigin, summary) %>% tail(10)
 ```
-
+There are quite a few different flavors, and as seen in question 2, there are quite a few countries of origin. However, country of origin does not seem to impact the rating of the chocolates all that much. This is not too unsurprising since in the end what matters more than where the bean is coming from is how the companies are utilizing that bean when making their chocolate. The flavor can be changed somewhat by where the chocolate bean is coming from, but surprisingly that does not seem to have a major influence on the rating of the chocolate.
 
 
 ## #5
